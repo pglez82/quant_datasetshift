@@ -5,19 +5,16 @@ import numpy as np
 
 class ConceptShiftProtocol(AbstractStochasticSeededProtocol):
     """
-    Generates mixtures of two domains (A and B) at controlled rates, but preserving the original class prevalence.
+    Generates samples with concept shift. The idea is to use a multiclass dataset where there is a cut point used
+    to binarize it. Concept shift is simulated changing the cut point to transform examples in positive or negative.
 
-    :param domainA:
-    :param domainB:
-    :param sample_size:
-    :param repeats:
-    :param prevalence: the prevalence to preserv along the mixtures. If specified, should be an array containing
-        one prevalence value (positive float) for each class and summing up to one. If not specified, the prevalence
-        will be taken from data (default).
-    :param mixture_points: an integer indicating the number of points to take from a linear scale (e.g., 21 will
-        generate the mixture points [1, 0.95, 0.9, ..., 0]), or the array of mixture values itself.
-        the specific points
-    :param random_state:
+    :param data: LabelledCollection with the data
+    :param sample_size: desired size for the samples
+    :param cut_points: array with the cut points to use to generate concept shift
+    :param repeats: number of repetitions (number of samples for each cut point)
+    :param prevalence: the prevalence to preserv along the mixtures. Array with two numbers indicating the prevalence
+        of the negative and positive class.
+    :param random_state: random state to make results reproducible
     """
 
     def __init__(

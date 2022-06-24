@@ -3,7 +3,7 @@ from quapy.data.base import LabelledCollection
 from sklearn.linear_model import LogisticRegression
 from sklearn.calibration import CalibratedClassifierCV
 from quapy.protocol import NPP
-from concept_shift_protocol import ConceptShiftProtocol
+from utils.concept_shift_protocol import ConceptShiftProtocol
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
