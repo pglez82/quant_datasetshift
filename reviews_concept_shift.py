@@ -17,8 +17,8 @@ def load_data():
     domainB = LabelledCollection.load(os.path.join(base_path, "Books.txt"), from_text)
     return domainA, domainB
 
-def bias(true,prev):
-    return true[1]-prev[1]
+def bias(true,pred):
+    return pred[1]-true[1]
 
 
 #Configuration
