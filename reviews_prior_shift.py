@@ -56,8 +56,8 @@ print("test",test.stats(show=False))
 quant_methods = {
     "CC":qp.method.aggregative.CC(LogisticRegression(max_iter=1000)),
     "PCC":qp.method.aggregative.PCC(LogisticRegression(max_iter=1000)),
-    "ACC":qp.method.aggregative.ACC(LogisticRegression(max_iter=1000)),
-    "PACC":qp.method.aggregative.ACC(LogisticRegression(max_iter=1000)),
+    "ACC":qp.method.aggregative.ACC(LogisticRegression(max_iter=1000), val_split=5, n_jobs=-1),
+    "PACC":qp.method.aggregative.PACC(LogisticRegression(max_iter=1000), val_split=5, n_jobs=-1),
     "HDy":qp.method.aggregative.HDy(LogisticRegression(max_iter=1000)),
     "EMQ":qp.method.aggregative.EMQ(CalibratedClassifierCV(LogisticRegression(max_iter=1000),n_jobs=-1)),
     "MLPE":qp.method.non_aggregative.MaximumLikelihoodPrevalenceEstimation()
