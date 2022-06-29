@@ -9,6 +9,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
 from datetime import datetime
+from utils.pcc_weighted import PCCWeighted
 import os
 
 def load_data():
@@ -70,6 +71,11 @@ quant_methods = {
     "PACC":qp.method.aggregative.PACC(LogisticRegression(max_iter=1000), val_split=5, n_jobs=-1),
     "HDy":qp.method.aggregative.HDy(LogisticRegression(max_iter=1000)),
     "EMQ":qp.method.aggregative.EMQ(CalibratedClassifierCV(LogisticRegression(max_iter=1000),n_jobs=-1)),
+    "PCCW":PCCWeighted(
+                       LogisticRegression(max_iter=1000),
+                       qp.method.aggregative.EMQ(CalibratedClassifierCV(LogisticRegression(max_iter=1000),n_jobs=-1)),
+                       param_grid = {'C': [0.01, 0.1, 1, 10, 100, 1000],'class_weight': ['balanced', None]}
+                    ),
     "MLPE":qp.method.non_aggregative.MaximumLikelihoodPrevalenceEstimation()
 }
 
@@ -101,7 +107,10 @@ for n_training_sample, training_sample in enumerate(trainSampleGenerator()):
     print("Done. Fitting quantification methods...")
     grids = {}
     for quant_name, quantifier in quant_methods.items():
-        grids[quant_name] = qp.model_selection.GridSearchQ(quantifier,param_grid=param_grid,protocol=NPP(valsplit,sample_size=n_test_samples, random_state=seed),refit=True,verbose=False).fit(trainsplit)
+        if quant_name != "PCCW":
+            grids[quant_name] = qp.model_selection.GridSearchQ(quantifier,param_grid=param_grid,protocol=NPP(valsplit,sample_size=n_test_samples, random_state=seed),refit=True,verbose=False).fit(trainsplit)
+        else:
+            grids[quant_name] = quantifier.fit(trainset)
     print("Done. Evaluating...")
     for p_test in ps_test:
         for quant_name, quantifier in quant_methods.items():
@@ -112,7 +121,7 @@ for n_training_sample, training_sample in enumerate(trainSampleGenerator()):
                 n_test_sample = n_test_sample % n_test_samples
                 mixture_point_test = testSampleGenerator.mixture_points[i_covariate_shift_test]
                 preds = grids[quant_name].quantify(test_sample[0])
-                true = test_sample[1]
+                true = test_sample[1] 
                 error = error_function(true,preds)
                 experiment_results[quant_name] = experiment_results[quant_name].append([{'domainA_prop_train':mixture_point_train,
                                                         'domainA_prop_test':mixture_point_test,
