@@ -4,5 +4,6 @@ datasets
 results
 outputs
 datasets
+images
 .vscode
 __pycache__
