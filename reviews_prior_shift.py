@@ -112,9 +112,9 @@ with qp.util.temp_seed(seed):
                                                         
         quant_methods = create_quant_methods(max_iter)
 
+    #add date to file name
+    date_string = f'{datetime.now():%Y_%m_%d_%H_%M}'
     for quant_name, quantifier in quant_methods.items():
-        #add date to file name
-        date_string = f'{datetime.now():%Y_%m_%d_%H_%M}'
         #save pandas dataframe
         experiment_results[quant_name].to_csv("results/prior/results_%s_%s.csv" % (date_string,quant_name))
 
