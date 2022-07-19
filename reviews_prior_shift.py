@@ -71,7 +71,7 @@ with qp.util.temp_seed(seed):
     param_grid = {'C': [0.01, 0.1, 1, 10, 100, 1000],'class_weight': ['balanced', None]}
 
     #We want to generate bags with covariate shift for training
-    trainSampleGenerator = APP(train, sample_size = training_sample_size,n_prevalences=n_prevalences,return_type="labelled_collection",repeats=n_reps_train,random_state=seed,smooth_limits_epsilon=0.01)
+    trainSampleGenerator = APP(train, sample_size = training_sample_size,n_prevalences=n_prevalences,return_type="labelled_collection",repeats=n_reps_train,random_state=seed,smooth_limits_epsilon=0.02)
 
     experiment_results = {}
     quant_methods = create_quant_methods(max_iter)
