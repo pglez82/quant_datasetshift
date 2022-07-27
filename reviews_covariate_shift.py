@@ -27,20 +27,20 @@ def binarize_dataset(dataset):
 
 def create_quant_methods(max_iter):
     return {
-        #"CC":qp.method.aggregative.CC(LogisticRegression(max_iter=max_iter)),
-        #"PCC":qp.method.aggregative.PCC(LogisticRegression(max_iter=max_iter)),
+        "CC":qp.method.aggregative.CC(LogisticRegression(max_iter=max_iter)),
+        "PCC":qp.method.aggregative.PCC(LogisticRegression(max_iter=max_iter)),
         "ACC":qp.method.aggregative.ACC(LogisticRegression(max_iter=max_iter), val_split=5, n_jobs=-1),
-        #"PACC":qp.method.aggregative.PACC(LogisticRegression(max_iter=max_iter), val_split=5, n_jobs=-1),
-        #"HDy":qp.method.aggregative.HDy(LogisticRegression(max_iter=max_iter)),
+        "PACC":qp.method.aggregative.PACC(LogisticRegression(max_iter=max_iter), val_split=5, n_jobs=-1),
+        "HDy":qp.method.aggregative.HDy(LogisticRegression(max_iter=max_iter)),
         "DyS":qp.method.aggregative.DyS(LogisticRegression(max_iter=max_iter), distance='topsoe',n_bins=10),
-        #"SMM":qp.method.aggregative.SMM(LogisticRegression(max_iter=max_iter)),
-        #"EMQ":qp.method.aggregative.EMQ(CalibratedClassifierCV(LogisticRegression(max_iter=max_iter),n_jobs=-1)),
-        #"PCCW":PCCWeighted(
-        #                LogisticRegression(max_iter=max_iter),
-        #                qp.method.aggregative.EMQ(CalibratedClassifierCV(LogisticRegression(max_iter=max_iter),n_jobs=-1)),
-        #                param_grid = {'C': [0.01, 0.1, 1, 10, 100, 1000],'class_weight': ['balanced', None]}
-        #                ),
-        #"MLPE":qp.method.non_aggregative.MaximumLikelihoodPrevalenceEstimation()
+        "SMM":qp.method.aggregative.SMM(LogisticRegression(max_iter=max_iter)),
+        "SLD":qp.method.aggregative.EMQ(CalibratedClassifierCV(LogisticRegression(max_iter=max_iter),n_jobs=-1)),
+        "PCCW":PCCWeighted(
+                        LogisticRegression(max_iter=max_iter),
+                        qp.method.aggregative.EMQ(CalibratedClassifierCV(LogisticRegression(max_iter=max_iter),n_jobs=-1)),
+                        param_grid = {'C': [0.01, 0.1, 1, 10, 100, 1000],'class_weight': ['balanced', None]}
+                        ),
+        "MLPE":qp.method.non_aggregative.MaximumLikelihoodPrevalenceEstimation()
     }
 
 

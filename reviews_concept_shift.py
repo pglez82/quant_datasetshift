@@ -29,7 +29,7 @@ def create_quant_methods(max_iter):
         "HDy":qp.method.aggregative.HDy(LogisticRegression(max_iter=max_iter)),
         "DyS":qp.method.aggregative.DyS(LogisticRegression(max_iter=max_iter), distance='topsoe',n_bins=10),
         "SMM":qp.method.aggregative.SMM(LogisticRegression(max_iter=max_iter)),
-        "EMQ":qp.method.aggregative.EMQ(CalibratedClassifierCV(LogisticRegression(max_iter=max_iter),n_jobs=-1)),
+        "SLD":qp.method.aggregative.EMQ(CalibratedClassifierCV(LogisticRegression(max_iter=max_iter),n_jobs=-1)),
         "MLPE":qp.method.non_aggregative.MaximumLikelihoodPrevalenceEstimation()
     }
 
