@@ -86,4 +86,4 @@ class ChangePriorProtocol(AbstractStochasticSeededProtocol):
         return sampleA+sampleB
 
     def total(self):
-        return self.repeats * 3
+        return self.repeats * len(self.prevalences)
