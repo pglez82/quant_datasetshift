@@ -34,7 +34,7 @@ pip install jupyter seaborn
  The drawing for explanining each of the types of dataset shift where generated with the Jupyter Notebook `datasetshift_drawings.ipynb`.
 
  #### Preliminary analysis of data
- A preliminary analysis of data was carried out in the Jupyter Notebook `premiliminary _analysis_reviews.ipynb`. This notebook also generates the table with the description of the dataset.
+ A preliminary analysis of data was carried out in the Jupyter Notebook `premiliminary_analysis_reviews.ipynb`. This notebook also generates the table with the description of the dataset.
 
  #### Main experiments
  Experiments were carried out with python script and the subsequent analysis of the data generated, was carried out using Jupyter Notebooks. Note that the each notebook will automatically generate all the tables in latex code and the figures that are finally taken into the paper.
