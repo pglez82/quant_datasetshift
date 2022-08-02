@@ -48,6 +48,9 @@ class ChangePriorProtocol(AbstractStochasticSeededProtocol):
 
         #store the number of positives computed for each prevalence in case is needed
         self.n_dA_pos=np.zeros((len(self.prevalences)),dtype=int)
+        self.n_dA_neg=np.zeros((len(self.prevalences)),dtype=int)
+        self.n_dB_pos=np.zeros((len(self.prevalences)),dtype=int)
+        self.n_dB_neg=np.zeros((len(self.prevalences)),dtype=int)
 
         n_dA_neg = n_dB_pos = self.sample_size//6
         n_dB_neg = self.sample_size//3
@@ -71,6 +74,10 @@ class ChangePriorProtocol(AbstractStochasticSeededProtocol):
                 n_dB_neg = n_neg*2//3
             #store it
             self.n_dA_pos[i] = n_dA_pos
+            self.n_dA_neg[i] = n_dA_neg
+            self.n_dB_pos[i] = n_dB_pos
+            self.n_dB_neg[i] = n_dB_neg
+
 
             #print("[p=%.2f,classcond_change=%s] n_dA_neg=%d,n_dB_neg=%d,n_dA_pos=%d,n_dB_pos=%d" % (p,self.change_conditionals,n_dA_neg,n_dB_neg,n_dA_pos,n_dB_pos))
 
