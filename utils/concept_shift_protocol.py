@@ -65,3 +65,57 @@ class ConceptShiftProtocol(AbstractStochasticSeededProtocol):
 
     def total(self):
         return self.repeats * len(self.cut_points)
+
+class ConceptShiftProtocolV2(AbstractStochasticSeededProtocol):
+    """
+    In this version of the concept shift protocol we ensure that P(X) remains constant.
+    For doing that, samples are always drawn with a prevalence of 0.2 for each of the
+    five classes. Then, depending on the cut point, we binarize after drawing the sample.
+    That way, the only thing that changes is the cut point.
+
+    :param data: LabelledCollection with the data
+    :param sample_size: desired size for the samples
+    :param cut_points: array with the cut points to use to generate concept shift
+    :param repeats: number of repetitions (number of samples for each cut point)
+    :param random_state: random state to make results reproducible
+    """
+
+    def __init__(
+            self,
+            data: LabelledCollection,
+            sample_size,
+            cut_points,
+            repeats=1,
+            random_state=None,
+            return_type='sample_prev'):
+        super(ConceptShiftProtocolV2, self).__init__(random_state)
+        self.data = data
+        self.sample_size = sample_size
+        self.repeats = repeats
+        self.cut_points = np.asarray(cut_points)
+        self.random_state = random_state
+        self.collator = OnLabelledCollectionProtocol.get_collator(return_type)
+
+    def binarize_dataset(self, dataset: LabelledCollection, cut_point: int):
+        labels = dataset.y
+        labels[labels<cut_point] = 0
+        labels[labels>=cut_point] = 1
+        return LabelledCollection(dataset.X, labels)
+
+    def samples_parameters(self):
+        indexes = []
+        cut_point_sample = []
+        for cut_point in self.cut_points:
+            for _ in range(self.repeats):
+                idxs = self.data.sampling_index(self.sample_size,0.2,0.2,0.2,0.2,0.2)
+                indexes.append(idxs)
+                cut_point_sample.append(cut_point)
+        return list(zip(cut_point_sample,indexes))
+
+    def sample(self, indexes):
+        cut_point, indexes = indexes
+        sample = self.data.sampling_from_index(indexes)
+        return self.binarize_dataset(sample,cut_point)
+
+    def total(self):
+        return self.repeats * len(self.cut_points)
