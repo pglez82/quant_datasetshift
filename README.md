@@ -43,6 +43,8 @@ pip install jupyter seaborn
  - **Change in prior**: Script `reviews_changeprior.py` and notebook `analyze_results_changeprior.ipynb`.
  - **Covariate shift**: Script `reviews_covariate_shift.py` and notebook `analyze_results_covariate.ipynb`.
  - **Concept shift**: Script `reviews_concept_shift.py` and notebook `analyze_results_concept.ipynb`.
+ - **Concept shift v2**: Script `reviews_concept_shift_v2.py` and notebook `analyze_results_concept_v2.ipynb`.
+ TODO: remove one of the two concept shift experiments depending on what we put in the paper.
 
  Note that these python scripts may require some directories to be created, in particular, the directory `results` with a subdirectory for each experiment `prior`, `changeprior`, `covariate` and `concept`. The notebooks also need some directories created, in particular, `tables` and `images`, where latex tables and figures will be generated. Datasets must be placed under the `dataset/reviews` directory.
 
