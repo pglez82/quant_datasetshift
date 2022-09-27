@@ -37,10 +37,11 @@ class ConceptShiftProtocol(AbstractStochasticSeededProtocol):
 
     def binarize_dataset(self, dataset: LabelledCollection, cut_point: int):
         instances = dataset.X
-        labels = dataset.y
-        labels, instances = labels[labels!=cut_point], instances[labels!=cut_point]
+        #It is neccesary to make a copy if we do not make the slice
+        labels = np.array(dataset.y,copy=True)
+        #labels, instances = labels[labels!=cut_point], instances[labels!=cut_point]
         labels[labels<cut_point] = 0
-        labels[labels>cut_point] = 1
+        labels[labels>=cut_point] = 1
         return LabelledCollection(instances, labels)
 
     def samples_parameters(self):

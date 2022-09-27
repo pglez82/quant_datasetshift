@@ -43,7 +43,7 @@ n_reps_train = 10
 error_function = bias
 max_iter = 1000
 seed = 2032
-ps_train = [0.25, 0.5, 0.75]
+ps_train = [0.5]
 ps_test = [0.25, 0.5, 0.75]
 
 #set numpy seed
@@ -59,14 +59,14 @@ with qp.util.temp_seed(seed):
     fulldataset = domainA+domainB
 
     train, test = fulldataset.split_stratified(train_prop=0.6, random_state=seed)
-    test = test.uniform_sampling(50000, random_state=seed)
+    test = test.uniform_sampling(100000, random_state=seed)
 
     print("dataset",fulldataset.stats(show=False))
     print("train",train.stats(show=False))
     print("test",test.stats(show=False))
 
     param_grid = {'C': [0.01, 0.1, 1, 10, 100, 1000],'class_weight': ['balanced', None]}
-    cut_points = [2,3,4]
+    cut_points = [2,3,4,5]
 
     experiment_results = {}
     quant_methods = create_quant_methods(max_iter)

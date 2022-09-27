@@ -13,8 +13,8 @@ from datetime import datetime
 import os
 
 def load_data(base_path):
-    domainA = LabelledCollection.load(os.path.join(base_path, "Electronics_mini.txt"), from_text)
-    domainB = LabelledCollection.load(os.path.join(base_path, "Books_mini.txt"), from_text)
+    domainA = LabelledCollection.load(os.path.join(base_path, "Electronics.txt"), from_text)
+    domainB = LabelledCollection.load(os.path.join(base_path, "Books.txt"), from_text)
     #Clean the dataset as there are a couple of opinions with 0 stars
     domainB = LabelledCollection(domainB.X[domainB.y!=0], domainB.y[domainB.y!=0])
     return domainA, domainB
@@ -118,6 +118,6 @@ with qp.util.temp_seed(seed):
     date_string = f'{datetime.now():%Y_%m_%d_%H_%M}'
     for quant_name, quantifier in quant_methods.items():
         #save pandas dataframe
-        experiment_results[quant_name].to_csv("results/concept/results_%s_%s.csv" % (date_string,quant_name))
+        experiment_results[quant_name].to_csv("results/concept/results_v2_%s_%s.csv" % (date_string,quant_name))
 
 
