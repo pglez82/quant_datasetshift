@@ -62,7 +62,7 @@ with qp.util.temp_seed(seed):
     fulldataset = binarize_dataset(fulldataset)
 
     train, test = fulldataset.split_stratified(train_prop=0.6, random_state=seed)
-    test = test.uniform_sampling(50000, random_state=seed)
+    test = test.uniform_sampling(100000, random_state=seed)
 
     print("dataset",fulldataset.stats(show=False))
     print("train",train.stats(show=False))
