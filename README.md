@@ -21,7 +21,7 @@ pip install git+https://github.com/HLT-ISTI/QuaPy.git@protocols
 Note that for executing the notebooks it is needed to install `jupyter` and also `seaborn` for generating the figures:
 
 ```bash
-pip install jupyter seaborn
+pip install jupyter seaborn latex
 ```
 
  ### Datasets
