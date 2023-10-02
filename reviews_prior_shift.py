@@ -101,6 +101,14 @@ with qp.util.temp_seed(seed):
                 n_test_sample = n_test_sample % n_test_samples
                 preds = grids[quant_name].quantify(test_sample[0])
                 true = test_sample[1]
+                if quant_name=='ACC' and hasattr(grids[quant_name].best_model_, 'tpr') and hasattr(grids[quant_name].best_model_, 'fpr') and hasattr(grids[quant_name].best_model_, 'prev_cc'):
+                        tpr=grids[quant_name].best_model_.tpr
+                        fpr=grids[quant_name].best_model_.fpr
+                        prev_cc=grids[quant_name].best_model_.prev_cc
+                else:
+                    tpr=None
+                    fpr=None
+                    prev_cc=None
                 error = error_function(true,preds)
                 experiment_results[quant_name] = experiment_results[quant_name].append([{
                                                         'p_train':trainset.p[1],
@@ -108,6 +116,9 @@ with qp.util.temp_seed(seed):
                                                         'train_rep':rep,
                                                         'test_sample':n_test_sample,
                                                         'p_hat':preds,
+                                                        'tpr':tpr,
+                                                        'fpr':fpr,
+                                                        'prev_cc':prev_cc,
                                                         'error':error}],ignore_index=True)
                                                         
         quant_methods = create_quant_methods(max_iter)
@@ -116,6 +127,6 @@ with qp.util.temp_seed(seed):
     date_string = f'{datetime.now():%Y_%m_%d_%H_%M}'
     for quant_name, quantifier in quant_methods.items():
         #save pandas dataframe
-        experiment_results[quant_name].to_csv("results/prior/results_%s_%s.csv" % (date_string,quant_name))
+        experiment_results[quant_name].to_csv("results/prior/results_experimenttpr_%s_%s.csv" % (date_string,quant_name))
 
 
