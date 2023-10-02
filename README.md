@@ -7,7 +7,7 @@ The recommendation is to install the required dependencies in a separate virtual
 
 ```bash
 # clone the project
-git clone git@github.com:pglez82/quant_datasetshift.git
+git clone https://github.com/pglez82/quant_datasetshift.git
 cd quant_datasetshift
 # create the virtual environment
 python3 -m venv venv
@@ -16,7 +16,7 @@ source venv/bin/activate
 # update pip
 pip install --upgrade pip
 # install quapy
-pip install git+https://github.com/HLT-ISTI/QuaPy.git@protocols
+pip install git+https://github.com/pglez82/QuaPy.git@protocols
 ```
 Note that for executing the notebooks it is needed to install `jupyter` and also `seaborn` for generating the figures:
 
