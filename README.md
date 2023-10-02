@@ -40,11 +40,10 @@ pip install jupyter seaborn latex
  Experiments were carried out with python script and the subsequent analysis of the data generated, was carried out using Jupyter Notebooks. Note that the each notebook will automatically generate all the tables in latex code and the figures that are finally taken into the paper.
 
  - **Prior probability shift**: Script `reviews_prior_shift.py` and notebook `analyze_results_prior.ipynb`.
- - **Change in prior**: Script `reviews_changeprior.py` and notebook `analyze_results_changeprior.ipynb`.
- - **Covariate shift**: Script `reviews_covariate_shift.py` and notebook `analyze_results_covariate.ipynb`.
+ - **Global covariate shift**: Script `reviews_covariate_shift.py` and notebook `analyze_results_covariate.ipynb`.
+ - **Local covariate shift**: Script `reviews_covariate_local.py` and notebook `analyze_results_covariate_local.ipynb`.
  - **Concept shift**: Script `reviews_concept_shift.py` and notebook `analyze_results_concept.ipynb`.
- - **Concept shift v2**: Script `reviews_concept_shift_v2.py` and notebook `analyze_results_concept_v2.ipynb`.
  TODO: remove one of the two concept shift experiments depending on what we put in the paper.
 
- Note that these python scripts may require some directories to be created, in particular, the directory `results` with a subdirectory for each experiment `prior`, `changeprior`, `covariate` and `concept`. The notebooks also need some directories created, in particular, `tables` and `images`, where latex tables and figures will be generated. Datasets must be placed under the `dataset/reviews` directory.
+ Note that these python scripts may require some directories to be created, in particular, the directory `results` with a subdirectory for each experiment `prior`, `covariatelocal`, `covariate` and `concept`. The notebooks also need some directories created, in particular, `tables` and `images`, where latex tables and figures will be generated. Datasets must be placed under the `dataset/reviews` directory.
 

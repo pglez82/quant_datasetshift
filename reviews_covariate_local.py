@@ -139,6 +139,6 @@ with qp.util.temp_seed(seed):
     date_string = f'{datetime.now():%Y_%m_%d_%H_%M}'
     for quant_name, quantifier in quant_methods.items():
         #save pandas dataframe
-        experiment_results[quant_name].to_csv("results/changeprior/results_%s_%s.csv" % (date_string,quant_name))
+        experiment_results[quant_name].to_csv("results/covariatelocal/results_%s_%s.csv" % (date_string,quant_name))
 
 
