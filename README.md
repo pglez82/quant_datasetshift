@@ -26,7 +26,7 @@ pip install jupyter seaborn latex
 
  ### Datasets
 
- Indicate from were the datasets can be downloaded.
+The dataset is publicly available in [Zenodo](https://zenodo.org/record/8421611). The file should be downloaded and uncompressed in the folder `datasets/reviews`.
  
  ### Description of the scripts
  
@@ -43,7 +43,6 @@ pip install jupyter seaborn latex
  - **Global covariate shift**: Script `reviews_covariate_shift.py` and notebook `analyze_results_covariate.ipynb`.
  - **Local covariate shift**: Script `reviews_covariate_local.py` and notebook `analyze_results_covariate_local.ipynb`.
  - **Concept shift**: Script `reviews_concept_shift.py` and notebook `analyze_results_concept.ipynb`.
- TODO: remove one of the two concept shift experiments depending on what we put in the paper.
 
  Note that these python scripts may require some directories to be created, in particular, the directory `results` with a subdirectory for each experiment `prior`, `covariatelocal`, `covariate` and `concept`. The notebooks also need some directories created, in particular, `tables` and `images`, where latex tables and figures will be generated. Datasets must be placed under the `dataset/reviews` directory.
 
